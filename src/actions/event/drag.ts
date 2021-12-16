@@ -1,4 +1,5 @@
 import { Base } from '../base';
+import { Util } from '../unti';
 export default class DragFunction extends Base {
     private lastPosition: number[] = [];
     private dragging: boolean = false;
@@ -58,11 +59,18 @@ export default class DragFunction extends Base {
             console.log(startPosition, endPosition, startX, startY, endX, endY, startPoint, endPoint);
             const _midX = startX + (endX - startX) / 2;
             const _midY = startY + (endY - startY) / 2;
-            line.attr('points', [[startX, startY],
-            [_midX, startY],
-            [_midX, _midY],
-            [endX, _midY],
-            [endX, endY]]);
+            if (true) {
+                const _fillet = Util.getFilletLine(startX, startY, endX, endY);
+                line.attr("path", _fillet)
+            //    line.attr("path", `M ${startX},${startY} C ${_midX},${startY} ${_midX},${endY} ${endX},${endY}`)
+            } else {
+                line.attr('points', [[startX, startY],
+                [_midX, startY],
+                [_midX, _midY],
+                [endX, _midY],
+                [endX, endY]]);
+            }
+
         })
     }
 }

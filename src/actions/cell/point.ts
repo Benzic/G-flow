@@ -1,7 +1,8 @@
 
 import { DisplayObjectConfig, Circle, INode, CircleStyleProps } from '@antv/g'
 import { Base } from '../base';
-import PolyLine from './polyline';
+import { PolyLine, Path } from '.';
+import { Util } from '../unti'
 export default class Point extends Base {
     private canvas: INode = null;
     private parent: INode = null
@@ -50,24 +51,53 @@ export default class Point extends Base {
         });
     }
     drawLine(startX: number, startY: number, endX: number, endY: number): INode {
-        const polyline = new PolyLine({ canvas: Point.getActiveLayer() });
-        const _midX = startX + (endX - startX) / 2;
-        const _midY = startY + (endY - startY) / 2;
-        return polyline.draw({
-            id: 'polyline',
-            style: {
-                points: [
-                    [startX, startY],
-                    [_midX, startY],
-                    [_midX, _midY],
-                    [endX, _midY],
-                    [endX, endY],
-                ],
-                lineDash: [10, 10],
-                stroke: 'red',
-                lineWidth: 5,
-                cursor: 'pointer',
-            },
-        })
+        if (true) {
+            const path = new Path({ canvas: Point?.getActiveLayer() });
+            const _midX = startX + (endX - startX) / 2;
+            const _midY = startY + (endY - startY) / 2;
+            const _fillet = Util.getFilletLine(startX, startY, endX, endY)
+            console.log(_fillet);
+            return path.draw({
+                id: 'path',
+                style: {
+                    path: _fillet,
+                    stroke: 'red',
+                    lineWidth: 4,
+                    lineDash: [10, 10]
+                },
+            })
+        } else {
+            const polyline = new PolyLine({ canvas: Point?.getActiveLayer() });
+            const _midX = startX + (endX - startX) / 2;
+            const _midY = startY + (endY - startY) / 2;
+            return polyline.draw({
+                id: 'polyline',
+                style: {
+                    points: [
+                        [startX, startY],
+                        [_midX, startY],
+                        [_midX, _midY],
+                        [endX, _midY],
+                        [endX, endY],
+                    ],
+                    stroke: 'red',
+                    lineWidth: 5,
+                    cursor: 'pointer',
+                },
+            })
+        }
+
+        // const path = new Path({ canvas: Point?.getActiveLayer() });
+        // const _midX = startX + (endX - startX) / 2;
+        // console.log(path);
+        // return path.draw({
+        //     id: 'path',
+        //     style: {
+        //         path: `M ${startX},${startY} C ${_midX},${startY} ${_midX},${endY} ${endX},${endY}`,
+        //         stroke: 'red',
+        //         lineWidth: 4,
+        //         lineDash: [10, 10]
+        //     },
+        // })
     }
 }

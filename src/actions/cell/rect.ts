@@ -1,9 +1,8 @@
 
 import { DisplayObjectConfig, Group, Rect as _Rect, RectStyleProps, INode } from '@antv/g'
 import { Base } from '../base';
-import Text from './text';
+import { Point, Text } from '.';
 import DragFunction from '../event/drag';
-import Point from './point';
 export default class Rect extends Base {
     private canvas: INode = null;
     private points: INode[] = [];
@@ -72,7 +71,7 @@ export default class Rect extends Base {
                 y: 25,
                 fill: '#000',
                 fontFamily: `Avenir, -apple-system, system-ui, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`,
-                fontSize: 22,
+                fontSize: 14,
                 fontStyle: 'normal',
                 fontVariant: 'normal',
                 fontWeight: 'normal',

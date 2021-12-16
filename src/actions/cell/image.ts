@@ -1,9 +1,8 @@
 
 import { Image as _Image, ImageStyleProps, DisplayObjectConfig, INode, Group } from '@antv/g'
 import { Base } from '../base';
-import Text from './text';
+import { Text, Point } from '.';
 import DragFunction from '../event/drag'
-import Point from './point';
 export default class Image extends Base {
     private canvas: INode = null;
     private points: INode[] = [];
@@ -16,7 +15,7 @@ export default class Image extends Base {
         this.canvas.appendChild(cell);
         this.onDrag(cell);
         this.onAnamate(cell);
-        // this.drawText(cell);
+        this.drawText(cell);
         this.onEventListen(cell);
         return cell
     }
@@ -64,13 +63,16 @@ export default class Image extends Base {
         _drag.onDragEvent();
     }
     drawText(cell) {
+        const { center } = cell.getGeometryBounds()
         const _text = new Text(cell)
         _text.draw({
             id: 'text',
             style: {
+                x: center[0],
+                y: center[1],
                 fill: '#000',
                 fontFamily: `Avenir, -apple-system, system-ui, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`,
-                fontSize: 22,
+                fontSize: 14,
                 fontStyle: 'normal',
                 fontVariant: 'normal',
                 fontWeight: 'normal',

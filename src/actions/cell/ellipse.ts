@@ -1,9 +1,8 @@
 
 import { Ellipse as _Ellipse, EllipseStyleProps, DisplayObjectConfig, INode, Group } from '@antv/g'
 import { Base } from '../base';
-import Text from './text';
+import { Text, Point } from '.';
 import DragFunction from '../event/drag'
-import Point from './point';
 export default class Ellipse extends Base {
     private canvas: INode = null;
     private points: INode[] = [];
@@ -70,7 +69,7 @@ export default class Ellipse extends Base {
             style: {
                 fill: '#000',
                 fontFamily: `Avenir, -apple-system, system-ui, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`,
-                fontSize: 22,
+                fontSize: 14,
                 fontStyle: 'normal',
                 fontVariant: 'normal',
                 fontWeight: 'normal',

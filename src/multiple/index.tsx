@@ -123,12 +123,17 @@ const MultipleFlow: React.FC<{
         id="wrapper"
       >
         <div
-          style={{ width: "100%", height: "100%", position: "relative", zIndex: 1 }}
+          style={{ width: "100%", height: "100%", position: "relative", zIndex: 2 }}
           id="canvas1"
         >
         </div>
         <div
           style={{ width: "100%", height: "100%", position: "absolute", left: 0, top: 0 }}
+          id="canvas3"
+        >
+        </div>
+        <div
+          style={{ width: "100%", height: "100%", position: "absolute", left: 0, top: 0, zIndex: 1 }}
           id="canvas2"
         >
         </div>

@@ -13,12 +13,13 @@ import ResizeObserver from "resize-observer-polyfill";
 import { Util } from '../actions/unti'
 import Index from '../actions/index'
 import CreateLine from '../actions/event/line'
-
+import BackGround from '../actions/cell/backgroud';
 export class Flow {
     public ctx: any = null;
     public _ctx: any = null;
     public canvas: any = null;
     public canvas2: any = null;
+    public canvas3: any = null;
     public _canvas: any = null;
     public wrapper: any = null;
     public keyElement: any = {};
@@ -120,6 +121,21 @@ export class Flow {
             renderer: canvasRenderer,
         });
         this.observer(canvas2);
+        const canvas3 = document.getElementById("canvas3");
+        this.canvas3 = new Canvas({
+            container: canvas3,
+            width: canvas3.clientWidth,
+            height: canvas3.clientHeight,
+            renderer: canvasRenderer,
+        });
+        this.observer(canvas3);
+        new BackGround({
+            displayLayer: this.canvas, activeLayer: this.canvas2,
+            canvas: this.canvas3, backgrounConfig: {
+                type: "image",
+                style: {},
+            }
+        })
         new CreateLine({ canvas: this.canvas2 })
         new Base({ displayLayer: this.canvas, activeLayer: this.canvas2 })
         new Index({ displayLayer: this.canvas, activeLayer: this.canvas2 })

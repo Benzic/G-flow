@@ -62,6 +62,24 @@ export const Util = {
         }
         return _points
     },
+    getLineFillet(startY, endY) {
+        if (endY > startY) {
+            return ["0 0 1", "1 0 0"]
+        } else {
+            return ["0 0 1", "1 0 1"]
+        }
+    },
+    getFilletLine(startX, startY, endX, endY) {
+        const _midX = startX + (endX - startX) / 2;
+        const _midY = startY + (endY - startY) / 2;
+        const _halfY = Math.abs(endY - startY);
+        const round = (_halfY / 2) > 20 ? 20 : _halfY / 2
+        if (endY > startY) {
+            return `M ${startX},${startY} L ${_midX - round},${startY} A ${round},${round} ${"0 0 1"} ${_midX},${startY + round} ${round < 20 ? `L ${_midX}, ${_midY}` : `L ${_midX}, ${endY - round}`} A ${round},${round} ${"1 0 0"} ${_midX + round},${endY} L ${endX}, ${endY}`
+        } else {
+            return `M ${startX},${startY} L ${_midX - round},${startY} A ${round},${round} ${"0 0 0"} ${_midX},${startY - round} ${round < 20 ? `L ${_midX}, ${_midY}` : `L ${_midX}, ${endY + round}`} A ${round},${round} ${"1 0 1"} ${_midX + round},${endY} L ${endX}, ${endY}`
+        }
+    },
     getMaxMin(points: string[][] | number[][]): { maxHeight: number, maxWidth: number } {
         let maxHeight: number = 0, maxWidth: number = 0, lastHeight: number = 0, lastWidth: number = 0;
         for (let i: number = 0; i <= points?.length - 1; i++) {
@@ -70,15 +88,15 @@ export const Util = {
             const _height: number = _2Index - lastHeight;
             const _width: number = _1Index - lastWidth; //没考虑负数得情况
             if (_height !== 0) {
-                maxHeight +=_height
+                maxHeight += _height
                 lastHeight = _2Index
             }
-         
+
             if (_width > 0) {
                 maxWidth += _width
                 lastWidth = _1Index
             }
         }
-        return { maxHeight:Math.abs(maxHeight), maxWidth:Math.abs(maxWidth) }
+        return { maxHeight: Math.abs(maxHeight), maxWidth: Math.abs(maxWidth) }
     }
 }
